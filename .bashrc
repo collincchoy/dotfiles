@@ -57,7 +57,7 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
@@ -124,4 +124,11 @@ export BUILD_VAULT_PASSWORD=password
 source <(kubectl completion bash)
 alias mk-start='minikube start --memory 20000 --cpus 5 --disk-size 60G --vm-driver kvm2'
 
-export KUBECONFIG=/home/collin/.kube/az-qa-config:/home/collin/.kube/config:/home/collin/.kube/az-dev01-config:/home/collin/.kube/az-dev02-config:/home/collin/.kube/az-dev04-config
+export KUBECONFIG=$HOME/.kube/config:$HOME/.kube/az-qa-config:$HOME/.kube/az-uat-config:$HOME/.kube/az-dev01-config:$HOME/.kube/az-dev02-config:$HOME/.kube/az-dev03-config:$HOME/.kube/az-dev04-config
+
+octopus=$'\U1f419'
+PS1=$octopus" "$PS1
+
+export PATH="/home/collin/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
